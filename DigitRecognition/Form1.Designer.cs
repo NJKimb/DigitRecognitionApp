@@ -20,7 +20,7 @@
             base.Dispose(disposing);
         }
 
-        private Button button1;
-        private Label label1;
+        private Button submit_button;
+        private Label result_text;
     }
 }

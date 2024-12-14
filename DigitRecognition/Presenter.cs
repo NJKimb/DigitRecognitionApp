@@ -16,10 +16,10 @@ namespace Digit_Recognition
             model = new Model();
         }
 
-        public void On_Click()
+        public string submit_file(string file)
         {
-            String result = model.Python_Prediction();
-            view.On_Click_View(result);
+            String result = model.Python_Prediction(file);
+            return result;
         }
     }
 }

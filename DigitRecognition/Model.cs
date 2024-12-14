@@ -13,14 +13,14 @@ namespace Digit_Recognition
     {
         public Model() { }
 
-        public string Python_Prediction()
+        public string Python_Prediction(string file)
         {
             string result = null;
-            string path = "C:\\Users\\mocil\\source\\repos\\DigitRecognition\\DigitRecognition\\DigitRecognition\\";
+            string path = "C:\\Users\\mocil\\Source\\Repos\\DigitRecognitionApp\\DigitRecognition\\DigitRecognition\\";
 
             ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = "C:\\Python311\\python.exe";
-            start.Arguments = string.Format("{0}main.py {0}7.jpg {0}dict.pth", path);
+            start.FileName = "C:\\Users\\mocil\\AppData\\Local\\Programs\\Python\\Python312\\python.exe";
+            start.Arguments = string.Format("{0}main.py {1} {0}dict.pth", path, file);
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             start.RedirectStandardError = true;

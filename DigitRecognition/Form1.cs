@@ -1,3 +1,6 @@
+using System.Xml.Serialization;
+using System.Diagnostics;
+
 namespace Digit_Recognition
 {
     public partial class Form : System.Windows.Forms.Form
@@ -11,46 +14,56 @@ namespace Digit_Recognition
 
         private void InitializeComponent()
         {
-            button1 = new Button();
-            label1 = new Label();
+            submit_button = new Button();
+            result_text = new Label();
             SuspendLayout();
             // 
-            // button1
+            // submit_button
             // 
-            button1.Location = new Point(147, 129);
-            button1.Name = "button1";
-            button1.Size = new Size(157, 29);
-            button1.TabIndex = 0;
-            button1.Text = "Infer Number";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            submit_button.Location = new Point(166, 103);
+            submit_button.Name = "submit_button";
+            submit_button.Size = new Size(157, 46);
+            submit_button.TabIndex = 0;
+            submit_button.Text = "Infer Number";
+            submit_button.UseVisualStyleBackColor = true;
+            submit_button.Click += submit_click;
             // 
-            // label1
+            // result_text
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(166, 161);
-            label1.Name = "label1";
-            label1.Size = new Size(0, 20);
-            label1.TabIndex = 1;
+            result_text.AutoSize = true;
+            result_text.Location = new Point(150, 161);
+            result_text.Name = "result_text";
+            result_text.Size = new Size(0, 32);
+            result_text.TabIndex = 1;
             // 
             // Form
             // 
-            ClientSize = new Size(494, 422);
-            Controls.Add(label1);
-            Controls.Add(button1);
+            ClientSize = new Size(523, 422);
+            Controls.Add(result_text);
+            Controls.Add(submit_button);
             Name = "Form";
             ResumeLayout(false);
             PerformLayout();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void submit_click(object sender, EventArgs e)
         {
-            presenter.On_Click();
+            string file = get_file();
+            string result = presenter.submit_file(file);
+            result_text.Text = result;
         }
-        
-        public void On_Click_View(String result)
+        private string get_file()
         {
-            label1.Text = result;
+            var dialogue = new OpenFileDialog()
+            {
+                InitialDirectory = "c:",
+                RestoreDirectory = true
+            };
+
+            if (dialogue.ShowDialog() != DialogResult.OK)
+                return "";
+
+            return dialogue.FileName;
         }
     }
 }
